@@ -1,0 +1,66 @@
+// nayutyl.overlay
+
+#include <dt-bindings/zmk/matrix_transform.h>
+
+/ {
+    // 必須: このオーバーレイが適用されるシールドの名前を定義します。
+    // zmk-config/config/nayutyl.conf にて
+    // CONFIG_ZMK_BOARD_SHIELD="nayutyl" のように指定する際に必要になります。
+    // （元のファイルにはありませんでしたが、シールドとして定義する場合は必要です。）
+    compatible = "zmk,tset"; 
+
+    chosen {
+        zmk,kscan = &kscan0;
+        zmk,matrix-transform = &default_transform;
+    };
+
+    default_transform: keymap_transform_0 {
+        compatible = "zmk,matrix-transform";
+        columns = <2>; // 列数を2に設定
+        rows = <1>;    // 行数を1に設定
+        
+        // キーの物理的な配置とマトリクス上の位置の対応
+        // 1行2列なので、RC(0,0)とRC(0,1)の2つになります。
+        map = <
+            RC(0,0) RC(0,1)
+        >;
+    };
+
+    kscan0: kscan {
+        compatible = "zmk,kscan-gpio-matrix";
+        wakeup-source;
+
+        diode-direction = "col2row"; // ダイオードの向き
+
+        // 行（ROW）のGPIOピンの定義
+        // 1行なのでピンは1つです。
+        // 適当なGPIOピン (&gpio0 4) を例にしています。
+        // 実際のキーボードの回路図に合わせて正確なピンを指定してください。
+        // (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) は、
+        // 信号がHighで検出、プルダウン抵抗を有効にすることを意味します。
+        row-gpios
+            = <&gpio0 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            ; // 行は1つだけ
+
+        // 列（COL）のGPIOピンの定義
+        // 2列なのでピンは2つです。
+        // 適当なGPIOピン (&gpio0 5, &gpio0 6) を例にしています。
+        // こちらも実際のキーボードの回路図に合わせて正確なピンを指定してください。
+        col-gpios
+            = <&gpio0 5 (GPIO_PULL_UP)> // 列はプルアップが一般的
+            , <&gpio0 6 (GPIO_PULL_UP)>
+            ; // 列は2つ
+    };
+
+    // GPIOコントローラーの定義（通常はボードのdtsiで定義済みだが、
+    // 必要に応じてここでオーバーレイすることも可能）
+    // 例として、&gpio0 をオーバーレイしています。
+    // もし、あなたのボードが既に定義していれば、このセクションは不要かもしれません。
+    // または、`&pro_micro` のような特定のボードのピン定義をオーバーライドするために使います。
+    // 元のファイルにあった `&pro_micro` は、nRF52840系ボードでは通常使わない表記です。
+    // nRF52840では `&gpio0` や `&gpio1` を使用します。
+    // ここでは一般的なZMKボードでのピン表記として `&gpio0` を使用します。
+    &gpio0 {
+        status = "okay"; // GPIOポート0を有効にする
+    };
+};
