@@ -3,11 +3,6 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 
 / {
-    // 必須: このオーバーレイが適用されるシールドの名前を定義します。
-    // zmk-config/config/nayutyl.conf にて
-    // CONFIG_ZMK_BOARD_SHIELD="nayutyl" のように指定する際に必要になります。
-    // （元のファイルにはありませんでしたが、シールドとして定義する場合は必要です。）
-    compatible = "zmk,tsetkey"; 
 
     chosen {
         zmk,kscan = &kscan0;
