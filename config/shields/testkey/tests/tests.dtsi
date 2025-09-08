@@ -16,7 +16,7 @@
 
     // （元のファイルにはありませんでしたが、シールドとして定義する場合は必要です。）
 
-    compatible = "zmk,testkey"; 
+    compatible = "zmk,tests"; 
 
 
 
