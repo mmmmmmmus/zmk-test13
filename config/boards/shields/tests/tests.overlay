@@ -7,7 +7,7 @@
     };
 
     chosen {
-		zmk,kscan; = &kscan-0; // この行の末尾にセミコロンを追加
+		zmk,kscan = &kscan-0; ; // この行の末尾にセミコロンを追加
 	};
     
     // kscan0ノードをルート直下へ移動
@@ -22,9 +22,6 @@
             , <&gpio0 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
             ;
         
-        col-gpios
-            = <&gpio0 6 (GPIO_PULL_UP)>
-            , <&gpio0 7 (GPIO_PULL_UP)>
-            ;
+        
     };
 };
