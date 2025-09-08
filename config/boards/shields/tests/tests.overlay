@@ -1,27 +1,24 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 
 / {
-    // 短いエイリアスを定義
-    aliases {
-        kscan-0 = &kscan0;
-    };
-
-    chosen {
-		zmk,kscan = &kscan-0; ; // この行の末尾にセミコロンを追加
+	chosen {
+		zmk,kscan = &kscan0;
 	};
-    
-    // kscan0ノードをルート直下へ移動
-    kscan0: kscan_0 {
+
+	kscan0: kscan {
         compatible = "zmk,kscan-gpio-matrix";
         wakeup-source;
         
         diode-direction = "col2row";
         
         row-gpios
-            = <&gpio0 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&gpio0 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            = <&xiao_d 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&xiao_d 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
             ;
         
-        
+        col-gpios
+            = <&xiao_d 6 (GPIO_PULL_UP)>
+            , <&xiao_d 7 (GPIO_PULL_UP)>
+            ;
     };
 };
