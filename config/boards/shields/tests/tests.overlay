@@ -1,24 +1,29 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 
 / {
-	chosen {
-		zmk,kscan = &kscan0;
-	};
+    // 関連ノードを 'zmk_config' という短い名前の親ノードの下にまとめる
+    zmk_config: zmk_config {
+        compatible = "zmk,config";
 
-	kscan0: kscan {
-        compatible = "zmk,kscan-gpio-matrix";
-        wakeup-source;
-        
-        diode-direction = "col2row";
-        
-        row-gpios
-            = <&xiao_d 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&xiao_d 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            ;
-        
-        col-gpios
-            = <&xiao_d 6 (GPIO_PULL_UP)>
-            , <&xiao_d 7 (GPIO_PULL_UP)>
-            ;
+        chosen {
+            zmk,kscan = &kscan0;
+        };
+
+        kscan0: kscan_0 {
+            compatible = "zmk,kscan-gpio-matrix";
+            wakeup-source;
+            
+            diode-direction = "col2row";
+            
+            row-gpios
+                = <&xiao_d 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+                , <&xiao_d 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+                ;
+            
+            col-gpios
+                = <&xiao_d 6 (GPIO_PULL_UP)>
+                , <&xiao_d 7 (GPIO_PULL_UP)>
+                ;
+        };
     };
 };
