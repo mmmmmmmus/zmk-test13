@@ -13,14 +13,14 @@
         
         // 行（ROW）のGPIOピンを定義
         row-gpios
-            = <&gpio0 PIN_A (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&gpio0 PIN_B (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            = <&gpio0 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&gpio0 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
             ;
         
         // 列（COL）のGPIOピンを定義
         col-gpios
-            = <&gpio0 PIN_C (GPIO_PULL_UP)>
-            , <&gpio0 PIN_D (GPIO_PULL_UP)>
+            = <&gpio0 6 (GPIO_PULL_UP)>
+            , <&gpio0 7 (GPIO_PULL_UP)>
             ;
     };
 };
