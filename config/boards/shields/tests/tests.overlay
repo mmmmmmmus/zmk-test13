@@ -5,19 +5,19 @@
         zmk,kscan = &kscan0;
     };
     
+    // kscan0ノードをルート直下へ移動
     kscan0: kscan_0 {
         compatible = "zmk,kscan-gpio-matrix";
         wakeup-source;
         
-        diode-direction = "col2row"; // ダイオードの向き
+        diode-direction = "col2row";
         
-        // 行（ROW）のGPIOピンを定義
+        // ピン定義
         row-gpios
             = <&gpio0 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
             , <&gpio0 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
             ;
         
-        // 列（COL）のGPIOピンを定義
         col-gpios
             = <&gpio0 6 (GPIO_PULL_UP)>
             , <&gpio0 7 (GPIO_PULL_UP)>
