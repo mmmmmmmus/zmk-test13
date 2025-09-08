@@ -1,44 +1,29 @@
 /*
- * Copyright (c) 2020 The ZMK Contributors
- *
- * SPDX-License-Identifier: MIT
- */
-
-#include <behaviors.dtsi>
+* tests.keymap
+*/
+#include <dt-bindings/zmk/hid_usage.h>
+#include <dt-bindings/zmk/hid_usage_pages.h>
+#include <dt-bindings/zmk/modifiers.h>
 #include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/bt.h>
-
-#define QWERTY 0
-#define NUM 1
-#define SYM 2
-#define ARROWS 3
-#define MEDIA 4
-#define NAV 5
-
-&mt {
-    tapping-term-ms = <300>;
-    flavor = "tap-preferred";
-};
 
 / {
     keymap {
         compatible = "zmk,keymap";
 
+        default_transform: keymap_transform_0 {
+            compatible = "zmk,matrix-transform";
+            rows = <2>;
+            columns = <2>;
+            map = <
+                RC(0,0) RC(0,1)
+            >;
+        };
+
         default_layer {
-/* Qwerty
- * ,----------------------------------.        ,----------------------------------.
- * |   Q  |   W  |   E  |   R  |   T  |        |   Y  |   U  |   I  |   O  |   P  |
- * |------+------+------+------+------|        |------+------+------+------+------|
- * |   A  |   S  |   D  |   F  |   G  |        |   H  |   J  |   K  |   L  |   ;  |
- * |------+------+------+------+------|        |------+------+------+------+------|
- * |   Z  |   X  |   C  |   V  |   B  |        |   N  |   M  |   ,  |   .  |   /  |
- * `-------------+------+------+------|        |------+------+------+-------------'
- *               |F_SYM |F_NUM | Space|        | Bspc |F_ARR |F_MED |
- *               `--------------------'        `--------------------'
- */
-                        bindings = <
-    &kp Q       &kp W       
-                >;
+            bindings = <
+                &kp Q &kp W
+                &kp A &kp S
+            >;
         };
     };
 };
