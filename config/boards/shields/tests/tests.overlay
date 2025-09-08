@@ -1,27 +1,26 @@
-/*
- * Copyright (c) 2020 The ZMK Contributors
- *
- * SPDX-License-Identifier: MIT
- */
-
 #include <dt-bindings/zmk/matrix_transform.h>
 
 / {
-	chosen {
-		zmk,kscan = &kscan0;
-		zmk,matrix_transform = &default_transform;
-	};
-
-	default_transform: keymap_transform_0 {
-		compatible = "zmk,matrix-transform";
-		columns = <2>;
-		rows = <1>;
-// | SW1  | SW2  | SW3  | SW4  | SW5  |   | SW5  | SW4  | SW3  | SW2  | SW1  |
-// | SW6  | SW7  | SW8  | SW9  | SW10 |   | SW10 | SW9  | SW8  | SW7  | SW6  |
-// | SW11 | SW12 | SW13 | SW14 | SW15 |   | SW15 | SW14 | SW13 | SW12 | SW11 |
-//               | SW16 | SW17 | SW18 |   | SW18 | SW17 | SW16 |
-		map = <
-RC(0,0) RC(0,1) 
-		>;
-	};
+    chosen {
+        zmk,kscan = &kscan0;
+    };
+    
+    kscan0: kscan_0 {
+        compatible = "zmk,kscan-gpio-matrix";
+        wakeup-source;
+        
+        diode-direction = "col2row"; // ダイオードの向き
+        
+        // 行（ROW）のGPIOピンを定義
+        row-gpios
+            = <&gpio0 PIN_A (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&gpio0 PIN_B (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            ;
+        
+        // 列（COL）のGPIOピンを定義
+        col-gpios
+            = <&gpio0 PIN_C (GPIO_PULL_UP)>
+            , <&gpio0 PIN_D (GPIO_PULL_UP)>
+            ;
+    };
 };
