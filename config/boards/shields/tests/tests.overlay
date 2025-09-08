@@ -7,8 +7,8 @@
     };
 
     chosen {
-        zmk,kscan = &kscan-0; // エイリアスで参照
-    };
+		zmk,kscan = &kscan-0; // この行の末尾にセミコロンを追加
+	};
     
     // kscan0ノードをルート直下へ移動
     kscan0: kscan_0 {
